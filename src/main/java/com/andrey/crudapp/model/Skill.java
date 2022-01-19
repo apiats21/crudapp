@@ -1,49 +1,44 @@
 package com.andrey.crudapp.model;
 
+import lombok.*;
+
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
 @Table(name = "skills")
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+//@EqualsAndHashCode(exclude = "developers")
+
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (name = "skill_id")
+    @Column(name = "skill_id")
     private Long id;
-    @Column (name = "skill_name")
+    @Column(name = "skill_name")
     private String name;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable() // прописать эти данные в joinTable как оно там происходит
+    private List<Developer> developers;
 
-    public Skill() {
-    }
-
-    public Skill(long id, String name) {
+    public Skill(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Skill(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public Skill(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
     public String toString() {
-        return  "id= " + id +
-                ", name= " + name;
+        return "Skill{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

@@ -3,12 +3,13 @@ package com.andrey.crudapp.service;
 import com.andrey.crudapp.model.Developer;
 import com.andrey.crudapp.model.Team;
 import com.andrey.crudapp.repository.TeamRepository;
+import com.andrey.crudapp.repository.jdbc.JdbcTeamRepositoryImpl;
 import com.andrey.crudapp.repository.json.JsonTeamRepositoryImpl;
 
 import java.util.List;
 
 public class TeamService {
-    private final TeamRepository teamRepository = new JsonTeamRepositoryImpl();
+    private final TeamRepository teamRepository = new JdbcTeamRepositoryImpl();
 
     public Team getById(Long id) {
         return teamRepository.getById(id);

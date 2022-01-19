@@ -40,6 +40,6 @@ public class TeamView {
         System.out.println("Enter team id: ");
         Long id = scanner.nextLong();
         teamController.deleteById(id);
-        System.out.println("Developer was deleted");
+        System.out.println("Team was deleted");
     }
 }

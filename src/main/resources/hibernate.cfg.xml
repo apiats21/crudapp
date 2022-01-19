@@ -11,7 +11,10 @@
         <property name="hibernate.connection.password">fri13tech</property>
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
+        
+        <property name="hibernate.hbm2ddl.auto">none</property>
 
         <mapping class="com.andrey.crudapp.model.Skill"/>
+        <mapping class="com.andrey.crudapp.model.Developer"/>
     </session-factory>
 </hibernate-configuration>

@@ -1,4 +1,5 @@
 package com.andrey.crudapp.controller;
+
 import com.andrey.crudapp.model.Skill;
 import com.andrey.crudapp.service.SkillService;
 
@@ -13,7 +14,10 @@ public class SkillController {
     }
 
     public Skill create(String name) {
-        return skillService.create(name);
+        Skill skill = skillService.create(Skill.builder()
+                .name(name)
+                .build());
+        return skill;
     }
 
     public List<Skill> getAll() {
@@ -21,7 +25,10 @@ public class SkillController {
     }
 
     public Skill update(Long id, String name) {
-        return skillService.update(id, name);
+        return skillService.update(Skill.builder()
+                .id(id)
+                .name(name)
+                .build());
     }
 
     public void deleteById(Long id) {

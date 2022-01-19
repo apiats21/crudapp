@@ -1,4 +1,5 @@
 package com.andrey.crudapp.controller;
+
 import com.andrey.crudapp.model.Developer;
 import com.andrey.crudapp.model.Skill;
 import com.andrey.crudapp.service.DeveloperService;
@@ -22,7 +23,7 @@ public class DeveloperController {
     }
 
     public Developer update(Long id, String firstName, String lastname, List<Skill> skills) {
-        return developerService.update(id, firstName, lastname,skills);
+        return developerService.update(id, firstName, lastname, skills);
     }
 
     public void deleteById(Long id) {

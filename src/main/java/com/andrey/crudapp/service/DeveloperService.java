@@ -1,14 +1,16 @@
 package com.andrey.crudapp.service;
+
 import com.andrey.crudapp.model.Developer;
 import com.andrey.crudapp.model.Skill;
 import com.andrey.crudapp.repository.DeveloperRepository;
+import com.andrey.crudapp.repository.hibernate.HibernateDeveloperRepositoryImpl;
 import com.andrey.crudapp.repository.jdbc.JdbcDeveloperRepositoryImpl;
 import com.andrey.crudapp.repository.json.JsonDeveloperRepositoryImpl;
 
 import java.util.List;
 
 public class DeveloperService {
-    private final DeveloperRepository developerRepository = new JdbcDeveloperRepositoryImpl();
+    private final DeveloperRepository developerRepository = new HibernateDeveloperRepositoryImpl();
 
     public Developer getById(Long id) {
         return developerRepository.getById(id);
@@ -31,4 +33,5 @@ public class DeveloperService {
     public void deleteById(Long id) {
         developerRepository.deleteById(id);
     }
+
 }

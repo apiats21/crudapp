@@ -2,6 +2,11 @@ package com.andrey.crudapp.view;
 import com.andrey.crudapp.controller.DeveloperController;
 import com.andrey.crudapp.controller.SkillController;
 import com.andrey.crudapp.model.Developer;
+import com.andrey.crudapp.model.Skill;
+import com.andrey.crudapp.repository.hibernate.HibernateDeveloperRepositoryImpl;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class DeveloperView {
@@ -20,7 +25,15 @@ public class DeveloperView {
         String firstName = scanner.nextLine();
         System.out.println("Enter developer last name: ");
         String lastName = scanner.nextLine();
-        Developer developer = developerController.create(firstName, lastName, skillController.getAll());
+        System.out.println("Enter skills id, -exit- to finish");
+        List<Skill> skills = new ArrayList<>();
+        while (scanner.hasNextInt()) {
+            Long skillId = scanner.nextLong();
+//            developerController.saveSkillToDevSkillDb(skillId);
+            Skill result = skillController.getById(skillId);
+            skills.add(result);
+        }
+        Developer developer = developerController.create(firstName, lastName, skills);
         System.out.println("Developer created: " + developer);
     }
 
@@ -32,7 +45,15 @@ public class DeveloperView {
         String firstname = scanner.nextLine();
         System.out.println("Enter developer last name:");
         String lastName = scanner.nextLine();
-        Developer developer = developerController.update(id, firstname, lastName, skillController.getAll());
+        System.out.println("Enter skills id, -exit- to finish");
+        List<Skill> skills = new ArrayList<>();
+        while (scanner.hasNextInt()) {
+            Long skillId = scanner.nextLong();
+//            developerController.saveSkillToDevSkillDb(skillId);
+            Skill result1 = skillController.getById(skillId);
+            skills.add(result1);
+        }
+        Developer developer = developerController.update(id, firstname, lastName, skills);
         System.out.println("Developer updated: " + developer);
     }
 

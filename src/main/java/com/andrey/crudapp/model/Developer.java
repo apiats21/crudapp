@@ -1,18 +1,36 @@
 package com.andrey.crudapp.model;
+import lombok.*;
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "developers")
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Developer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "developer_id")
     private Long id;
+    @Column(name = "developer_firstname")
     private String firstName;
+    @Column(name = "developer_lastname")
     private String lastName;
+    @JoinTable(
+            name = "developers_skills",
+            joinColumns = @JoinColumn(
+                    name = "developer_id",
+                    referencedColumnName = "developer_id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "skill_id",
+                    referencedColumnName = "skill_id"
+            )
+    )
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Skill> skills;
-
-    public Developer(Long id, String firstName, String lastName, List<Skill> skills) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.skills = skills;
-    }
 
     public Developer(String firstName, String lastName, List<Skill> skills) {
         this.firstName = firstName;
@@ -20,41 +38,10 @@ public class Developer {
         this.skills = skills;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public List<Skill> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(List<Skill> skills) {
-        this.skills = skills;
-    }
-
     @Override
     public String toString() {
-        return  "id=" + id +
+        return "Developer{" +
+                "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", skills=" + skills +
