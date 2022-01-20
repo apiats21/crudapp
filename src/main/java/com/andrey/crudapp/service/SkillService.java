@@ -1,34 +1,18 @@
 package com.andrey.crudapp.service;
+
 import com.andrey.crudapp.model.Skill;
-import com.andrey.crudapp.repository.SkillRepository;
-import com.andrey.crudapp.repository.hibernate.HibernateSkillRepositoryImpl;
+
 import java.util.List;
 
-public class SkillService {
-    private final SkillRepository skillRepository;
+public interface SkillService {
 
-    public SkillService() { this.skillRepository = new HibernateSkillRepositoryImpl(); }
+    public Skill getById(Long id);
 
-    public SkillService(SkillRepository skillRepository) { this.skillRepository = skillRepository; }
+    public Skill create(Skill skill);
 
+    public List<Skill> getAll();
 
-    public Skill getById(Long id) {
-        return skillRepository.getById(id);
-    }
+    public Skill update(Skill skill);
 
-    public Skill create(Skill skill) {
-        return skillRepository.save(skill);
-    }
-
-    public List<Skill> getAll() {
-        return skillRepository.getAll();
-    }
-
-    public Skill update(Skill skill) {
-        return skillRepository.update(skill);
-    }
-
-    public void deleteById(Long id) {
-        skillRepository.deleteById(id);
-    }
+    public void deleteById(Long id);
 }

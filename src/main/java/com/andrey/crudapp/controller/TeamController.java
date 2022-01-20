@@ -2,12 +2,12 @@ package com.andrey.crudapp.controller;
 
 import com.andrey.crudapp.model.Developer;
 import com.andrey.crudapp.model.Team;
-import com.andrey.crudapp.service.TeamService;
+import com.andrey.crudapp.service.TeamServiceImpl;
 
 import java.util.List;
 
 public class TeamController {
-    private final TeamService teamService = new TeamService();
+    private final TeamServiceImpl teamService = new TeamServiceImpl();
 
     public Team getById(Long id) {
         return teamService.getById(id);

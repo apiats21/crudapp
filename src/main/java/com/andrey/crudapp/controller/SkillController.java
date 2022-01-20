@@ -1,13 +1,13 @@
 package com.andrey.crudapp.controller;
 
 import com.andrey.crudapp.model.Skill;
-import com.andrey.crudapp.service.SkillService;
+import com.andrey.crudapp.service.SkillServiceImpl;
 
 import java.util.List;
 
 public class SkillController {
 
-    private final SkillService skillService = new SkillService();
+    private final SkillServiceImpl skillService = new SkillServiceImpl();
 
     public Skill getById(Long id) {
         return skillService.getById(id);
