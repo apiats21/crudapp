@@ -29,7 +29,6 @@ public class DeveloperView {
         List<Skill> skills = new ArrayList<>();
         while (scanner.hasNextInt()) {
             Long skillId = scanner.nextLong();
-//            developerController.saveSkillToDevSkillDb(skillId);
             Skill result = skillController.getById(skillId);
             skills.add(result);
         }
@@ -49,9 +48,8 @@ public class DeveloperView {
         List<Skill> skills = new ArrayList<>();
         while (scanner.hasNextInt()) {
             Long skillId = scanner.nextLong();
-//            developerController.saveSkillToDevSkillDb(skillId);
-            Skill result1 = skillController.getById(skillId);
-            skills.add(result1);
+            Skill result = skillController.getById(skillId);
+            skills.add(result);
         }
         Developer developer = developerController.update(id, firstname, lastName, skills);
         System.out.println("Developer updated: " + developer);

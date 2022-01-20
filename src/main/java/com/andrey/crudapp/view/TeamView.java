@@ -1,7 +1,12 @@
 package com.andrey.crudapp.view;
 import com.andrey.crudapp.controller.DeveloperController;
 import com.andrey.crudapp.controller.TeamController;
+import com.andrey.crudapp.model.Developer;
+import com.andrey.crudapp.model.Skill;
 import com.andrey.crudapp.model.Team;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class TeamView {
@@ -18,7 +23,14 @@ public class TeamView {
     public void createTeam() {
         System.out.println("Enter team name:");
         String name = scanner.nextLine();
-        Team team = teamController.create(name, developerController.getAll());
+        System.out.println("Enter developers id, -exit- to finish");
+        List<Developer> developers = new ArrayList<>();
+        while (scanner.hasNextInt()) {
+            Long developerId = scanner.nextLong();
+            Developer result = developerController.getById(developerId);
+            developers.add(result);
+        }
+        Team team = teamController.create(name, developers);
         System.out.println("Team created: " + team);
     }
 
@@ -28,7 +40,14 @@ public class TeamView {
         System.out.println("Enter team new name:");
         scanner.nextLine();
         String name = scanner.nextLine();
-        Team team = teamController.update(id, name, developerController.getAll());
+        System.out.println("Enter developers id, -exit- to finish");
+        List<Developer> developers = new ArrayList<>();
+        while (scanner.hasNextInt()) {
+            Long developerId = scanner.nextLong();
+            Developer result = developerController.getById(developerId);
+            developers.add(result);
+        }
+        Team team = teamController.update(id, name, developers);
         System.out.println("Team was updated: " + team);
     }
 

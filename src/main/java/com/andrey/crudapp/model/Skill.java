@@ -1,10 +1,7 @@
 package com.andrey.crudapp.model;
-
 import lombok.*;
-
 import javax.persistence.*;
 import java.util.List;
-
 
 @Entity
 @Table(name = "skills")
@@ -12,8 +9,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//@EqualsAndHashCode(exclude = "developers")
-
+@ToString(exclude = "developers")
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,7 +18,7 @@ public class Skill {
     @Column(name = "skill_name")
     private String name;
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable() // прописать эти данные в joinTable как оно там происходит
+    @JoinTable()
     private List<Developer> developers;
 
     public Skill(Long id, String name) {
@@ -34,11 +30,4 @@ public class Skill {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "Skill{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

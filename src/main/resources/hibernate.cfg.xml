@@ -16,5 +16,6 @@
 
         <mapping class="com.andrey.crudapp.model.Skill"/>
         <mapping class="com.andrey.crudapp.model.Developer"/>
+        <mapping class="com.andrey.crudapp.model.Team"/>
     </session-factory>
 </hibernate-configuration>

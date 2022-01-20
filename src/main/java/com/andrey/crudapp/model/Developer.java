@@ -32,6 +32,10 @@ public class Developer {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Skill> skills;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable()
+    private List<Team> teams;
+
     public Developer(String firstName, String lastName, List<Skill> skills) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -44,7 +48,7 @@ public class Developer {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", skills=" + skills +
                 '}';
     }
 }
+

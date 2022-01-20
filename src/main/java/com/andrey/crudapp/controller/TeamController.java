@@ -1,4 +1,5 @@
 package com.andrey.crudapp.controller;
+
 import com.andrey.crudapp.model.Developer;
 import com.andrey.crudapp.model.Team;
 import com.andrey.crudapp.service.TeamService;
@@ -13,7 +14,11 @@ public class TeamController {
     }
 
     public Team create(String name, List<Developer> developers) {
-        return teamService.create(name, developers);
+        Team team = teamService.create(Team.builder()
+                .name(name)
+                .developers(developers)
+                .build());
+        return team;
     }
 
     public List<Team> getAll() {
@@ -21,8 +26,12 @@ public class TeamController {
     }
 
     public Team update(Long id, String name, List<Developer> developers) {
-        Team team = new Team(id, name, developers);
-        return teamService.update(id, name, developers);
+        Team team = teamService.update(Team.builder()
+                .id(id)
+                .name(name)
+                .developers(developers)
+                .build());
+        return team;
     }
 
     public void deleteById(Long id) {

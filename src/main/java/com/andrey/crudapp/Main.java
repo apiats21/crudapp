@@ -22,7 +22,7 @@ public class Main {
 //        developerView.getDeveloperById();
 //        developerView.createDeveloper();
 //        developerView.getAllDevelopers();
-        developerView.updateDeveloper();
+//        developerView.updateDeveloper();
 //        developerView.deleteDeveloperById();
 
         TeamView teamView = new TeamView();

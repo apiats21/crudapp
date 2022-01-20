@@ -1,61 +1,42 @@
 package com.andrey.crudapp.model;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import javax.persistence.*;
 import java.util.List;
 
-public class Team {
-    private Long id;
-    private String name;
-    private List<Developer> developers;
-    private TeamStatus status;
+@Entity
+@Data
+@Builder
+@Table(name = "teams")
+@NoArgsConstructor
+@AllArgsConstructor
 
-    public Team(long id, String name, List<Developer> developers) {
-        this.id = id;
-        this.name = name;
-        this.developers = developers;
-    }
+public class Team {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "team_id")
+    private Long id;
+    @Column(name = "team_name")
+    private String name;
+    @JoinTable(
+            name = "teams_developers",
+            joinColumns = @JoinColumn(
+                    name = "team_id",
+                    referencedColumnName = "team_id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "developer_id",
+                    referencedColumnName = "developer_id"
+            )
+    )
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Developer> developers;
+//    private TeamStatus status;
 
     public Team(String name, List<Developer> developers) {
         this.name = name;
         this.developers = developers;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Developer> getDevelopers() {
-        return developers;
-    }
-
-    public void setDevelopers(List<Developer> developers) {
-        this.developers = developers;
-    }
-
-    public TeamStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(TeamStatus status) {
-        this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "Team{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", developers=" + developers +
-                '}';
     }
 }

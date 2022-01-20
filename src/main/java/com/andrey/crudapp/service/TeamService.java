@@ -1,22 +1,22 @@
 package com.andrey.crudapp.service;
-
-import com.andrey.crudapp.model.Developer;
 import com.andrey.crudapp.model.Team;
 import com.andrey.crudapp.repository.TeamRepository;
-import com.andrey.crudapp.repository.jdbc.JdbcTeamRepositoryImpl;
-import com.andrey.crudapp.repository.json.JsonTeamRepositoryImpl;
-
+import com.andrey.crudapp.repository.hibernate.HibernateTeamRepositoryImpl;
 import java.util.List;
 
 public class TeamService {
-    private final TeamRepository teamRepository = new JdbcTeamRepositoryImpl();
+    private final TeamRepository teamRepository;
+
+    public TeamService() { this.teamRepository = new HibernateTeamRepositoryImpl(); }
+
+    public TeamService(TeamRepository teamRepository) { this.teamRepository = teamRepository; }
+
 
     public Team getById(Long id) {
         return teamRepository.getById(id);
     }
 
-    public Team create(String name, List<Developer> developers) {
-        Team team = new Team(name, developers);
+    public Team create(Team team) {
         return teamRepository.save(team);
     }
 
@@ -24,8 +24,7 @@ public class TeamService {
         return teamRepository.getAll();
     }
 
-    public Team update(Long id, String name, List<Developer> developers) {
-        Team team = new Team(id, name, developers);
+    public Team update(Team team) {
         return teamRepository.update(team);
     }
 
