@@ -4,11 +4,7 @@ import com.andrey.crudapp.model.Skill;
 import com.andrey.crudapp.repository.SkillRepository;
 import com.andrey.crudapp.utils.HibernateUtils;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 

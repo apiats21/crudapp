@@ -1,13 +1,11 @@
 package com.andrey.crudapp.repository.hibernate;
 
 import com.andrey.crudapp.model.Developer;
-import com.andrey.crudapp.model.Skill;
 import com.andrey.crudapp.repository.DeveloperRepository;
 import com.andrey.crudapp.utils.HibernateUtils;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -78,5 +76,4 @@ public class HibernateDeveloperRepositoryImpl implements DeveloperRepository {
             transaction.commit();
         }
     }
-
 }

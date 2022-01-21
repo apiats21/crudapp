@@ -4,7 +4,6 @@ import com.andrey.crudapp.model.Team;
 import com.andrey.crudapp.utils.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.junit.Ignore;
 import org.junit.jupiter.api.*;
 import java.util.Collections;
 import java.util.List;
@@ -76,7 +75,6 @@ class TeamServiceImplTest {
     @Test
     @Order(5)
     void update() {
-
         Long id = 1L;
         Team team = Team.builder()
                 .id(id)
@@ -94,10 +92,8 @@ class TeamServiceImplTest {
     }
 
     @Test
-    @Disabled
     @Order(6)
     void deleteById() {
-
         Long id = 1L;
         Team team = session.get(Team.class, id);
 

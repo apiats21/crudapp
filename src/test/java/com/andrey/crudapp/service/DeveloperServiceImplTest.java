@@ -1,17 +1,12 @@
 package com.andrey.crudapp.service;
 
 import com.andrey.crudapp.model.Developer;
-import com.andrey.crudapp.model.Skill;
 import com.andrey.crudapp.utils.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class DeveloperServiceImplTest {
@@ -103,7 +98,6 @@ class DeveloperServiceImplTest {
     @Test
     @Order(6)
     void deleteById() {
-
         Long id = 1L;
         Developer developer = session.get(Developer.class, id);
 

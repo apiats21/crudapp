@@ -4,12 +4,9 @@ import com.andrey.crudapp.model.Skill;
 import com.andrey.crudapp.utils.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.junit.Ignore;
 import org.junit.jupiter.api.*;
-
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class SkillServiceImplTest {
@@ -75,7 +72,6 @@ class SkillServiceImplTest {
     @Test
     @Order(5)
     void update() {
-
         Long id = 1L;
         Skill skill = Skill.builder()
                 .id(id)
@@ -94,7 +90,6 @@ class SkillServiceImplTest {
     @Test
     @Order(6)
     void deleteById() {
-
         Long id = 1L;
         Skill skill = session.get(Skill.class, id);
 
