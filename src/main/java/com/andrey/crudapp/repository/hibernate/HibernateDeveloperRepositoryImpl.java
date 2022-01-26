@@ -6,20 +6,25 @@ import com.andrey.crudapp.utils.HibernateUtils;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
 import java.util.Collections;
 import java.util.List;
 
 public class HibernateDeveloperRepositoryImpl implements DeveloperRepository {
 
+    private static final String GET_DEVELOPER_BY_ID = "FROM Developer d join fetch d.skills WHERE d.id = :aLong";
+    private static final String GET_ALL_DEVELOPERS ="FROM Developer d join fetch d.skills";
+
 
     @Override
     public Developer getById(Long aLong) {
         try (Session session = HibernateUtils.getSession()) {
-            Developer result = session.get(Developer.class, aLong);
-            if (result != null) {
-                Hibernate.initialize(result.getSkills());
-            }
-            return result;
+            Query query = session.createQuery(GET_DEVELOPER_BY_ID);
+            query.setParameter("aLong", aLong);
+            List results = query.getResultList();
+            return (Developer) results.get(0);
+
         } catch (Throwable t) {
             return null;
         }
@@ -41,11 +46,7 @@ public class HibernateDeveloperRepositoryImpl implements DeveloperRepository {
     @Override
     public List<Developer> getAll() {
         try (Session session = HibernateUtils.getSession()) {
-            List<Developer> developers = session.createQuery("FROM Developer", Developer.class).getResultList();
-            for (Developer developer : developers) {
-                Hibernate.initialize(developer.getSkills());
-            }
-            return developers;
+            return session.createQuery(GET_ALL_DEVELOPERS, Developer.class).getResultList();
         } catch (Throwable t) {
             return Collections.emptyList();
         }

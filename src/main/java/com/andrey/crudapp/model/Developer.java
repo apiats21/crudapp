@@ -47,8 +47,9 @@ public class Developer {
         return "Developer{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
+                ", lastName='" + lastName + '\''
+//                + skills + '}'
+                ;
     }
 }
 

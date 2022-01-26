@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "developers")
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,5 +27,12 @@ public class Skill {
 
     public Skill(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "id=" + id +
+                ", name='" + name + '}';
     }
 }

@@ -39,4 +39,12 @@ public class Team {
         this.name = name;
         this.developers = developers;
     }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "id=" + id +
+                ", name='" + name + '\'' + developers +
+                '}';
+    }
 }

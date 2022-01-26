@@ -1,26 +1,31 @@
 package com.andrey.crudapp.repository.hibernate;
+
 import com.andrey.crudapp.model.Team;
 import com.andrey.crudapp.repository.TeamRepository;
 import com.andrey.crudapp.utils.HibernateUtils;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import java.util.Collections;
 import java.util.List;
 
 public class HibernateTeamRepositoryImpl implements TeamRepository {
+
+    private static final String GET_TEAM_BY_ID = "FROM Team t join fetch t.developers WHERE t.id = :aLong";
+    private static final String GET_ALL_TEAMS = "FROM Team t join fetch t.developers";
+
     @Override
     public Team getById(Long aLong) {
         try (Session session = HibernateUtils.getSession()) {
-            Team result = session.get(Team.class, aLong);
-            if (result != null) {
-                Hibernate.initialize(result.getDevelopers());
-            }
-            return result;
+            Query query = session.createQuery(GET_TEAM_BY_ID);
+            query.setParameter("aLong", aLong);
+            List results = query.getResultList();
+            return (Team) results.get(0);
+
         } catch (Throwable t) {
             return null;
         }
-   }
+    }
 
     @Override
     public Team save(Team team) {
@@ -38,11 +43,7 @@ public class HibernateTeamRepositoryImpl implements TeamRepository {
     @Override
     public List<Team> getAll() {
         try (Session session = HibernateUtils.getSession()) {
-            List<Team> teams = session.createQuery("FROM Team", Team.class).getResultList();
-            for (Team team : teams) {
-                Hibernate.initialize(team.getDevelopers());
-            }
-            return teams;
+            return session.createQuery(GET_ALL_TEAMS, Team.class).getResultList();
         } catch (Throwable t) {
             return Collections.emptyList();
         }
